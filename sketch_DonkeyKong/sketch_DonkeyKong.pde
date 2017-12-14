@@ -2,15 +2,16 @@
 //anthony y
 
 int stage;
+Player jumpMan;
 
-Platform = new list
 
 void setup(){
+  size(800,800);
   stage=1;
+  jumpMan= new Player(width/2,height-50);
   
 }
 void draw(){
-  background(0);
   if (stage==1){
     runLevel1();
   }
@@ -19,5 +20,16 @@ void draw(){
 }
 
 void runLevel1(){
+  background(0);
+  jumpMan.display();
   
+}
+
+void keyPressed(){
+  if (key==RIGHT){
+  }
+  else if (key==LEFT){
+  }
+  else if (key==' '){
+  }
 }
