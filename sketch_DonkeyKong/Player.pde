@@ -1,17 +1,41 @@
-class Player{
-  int x,y;
+class Player {
+  float x, y; 
+  float dy, speed;
   int h=30;
   int w=30;
-  
-  Player(int _x,int _y){
+  boolean jump, left, right;
+
+  Player(float _x, float _y) {
     x=_x;
     y=_y;
+  }
+  void display() {
+    fill(255, 0, 0);
+    rect(x, y, h, w);
+  }
+  void move() {
+    if (left==true) {
+      x-=3;
+    } else if (right== true) {
+      x+=3;
+    } else if (jump==true) {
+      jump();
+    } else {
+    }
+  } 
+
+  void jump() {
+    speed=-10;
+    y+=speed;
+    speed+=gravity;
     
+    
+    //jump=false;
   }
-  void display(){
-    fill(255,0,0);
-    rect(x,y,h,w);
-  }
-  void jump(){
+
+
+
+  float x() {
+    return x;
   }
 }
