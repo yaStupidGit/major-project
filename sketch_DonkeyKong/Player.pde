@@ -1,6 +1,6 @@
 class Player {
-  float x, y; 
-  float dy, speed;
+  float x, y, startY; 
+  float dy;
   int h=30;
   int w=30;
   boolean jump, left, right;
@@ -25,17 +25,24 @@ class Player {
   } 
 
   void jump() {
-    speed=-10;
-    y+=speed;
-    speed+=gravity;
-    
-    
-    //jump=false;
+
+    if (jump==true) {
+      y+=dy;
+      dy+=GRAVITY ;
+      if (y>startY){
+        y=startY;
+        jump=false;
+        
+      }
+    }
   }
 
 
 
   float x() {
     return x;
+  }
+  float dy() {
+    return dy;
   }
 }
