@@ -15,4 +15,9 @@ class Platform{
     fill(0,0,255);
     rect(x,y,h,w);
   }
+  
+  //void pushUp(){
+    
+    
+  //}
 }

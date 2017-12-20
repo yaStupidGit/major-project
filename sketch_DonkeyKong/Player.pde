@@ -3,7 +3,7 @@ class Player {
   float dy;
   int h=30;
   int w=30;
-  boolean jump, left, right;
+  boolean jump, climb, left, right;
 
   Player(float _x, float _y) {
     x=_x;
@@ -27,14 +27,21 @@ class Player {
   void jump() {
 
     if (jump==true) {
-      y+=dy;
-      dy+=GRAVITY ;
-      if (y>startY){
-        y=startY;
-        jump=false;
+      if (straightJump) {
         
       }
+      y+=dy;
+      dy+=GRAVITY ;
+      if (y>startY) {
+        y=startY;
+        jump=false;
+        straightJump=false;
+      }
     }
+  }
+  void climb(){
+    
+    
   }
 
 
