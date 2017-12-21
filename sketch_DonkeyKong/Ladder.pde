@@ -16,6 +16,9 @@ class Ladder {
   int h() {
     return h;
   }
+  int w() {
+    return w;
+  }
   int x() {
     return x;
   }

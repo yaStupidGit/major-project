@@ -1,12 +1,11 @@
 // donkeykong 1981
 //anthony y
 
-Ladder a;
-Platform b;
-
-
+//GLOBALS
+int [][][][][]dataForLevels;
 float gameSpeed=frameRate;
-//ArrayList <Platform> thePlatforms;
+ArrayList <Platform> thePlatforms=new ArrayList<Platform>();
+ArrayList<Ladder> theLadders=new ArrayList<Ladder>();
 int stage;
 Player jumpMan;
 float GRAVITY, startY ;
@@ -14,15 +13,24 @@ boolean straightJump=false;
 
 
 void setup() {
-  a=new Ladder(100,height-100,100,30);
-  b=new Platform(100,height-200,70,50);
+  
   
   GRAVITY =0.2;
   size(800, 800);
   stage=1;
   jumpMan= new Player(width/2, height-50);
+  
+  
+
+  }
    
 }
+
+
+
+
+
+
 void draw() {
   if (stage==1) {
     runLevel1();
@@ -31,11 +39,23 @@ void draw() {
 
 void runLevel1() {
   background(0);
+  
+  
+  //jumpMan
   jumpMan.move();
   jumpMan. jump();
-  a.display();
-  b.display();
   jumpMan.display();
+  
+  //thePlatforms
+  
+  // theLadders
+  
+  //theMonkey
+  
+  //theBarrels
+  
+  
+  
 }   
     
 
@@ -54,7 +74,10 @@ void keyPressed() {
       jumpMan.dy=-5;
       
     }
-  }  
+  } 
+  else if (keyCode==UP&& jumpMan.canClimb== true){
+    jumpMan.climb();
+  }
 }
 
 void keyReleased() {
