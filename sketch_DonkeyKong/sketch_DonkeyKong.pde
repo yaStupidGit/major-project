@@ -13,17 +13,15 @@ boolean straightJump=false;
 
 
 void setup() {
-  
-  
+
+
   GRAVITY =0.2;
   size(800, 800);
   stage=1;
   jumpMan= new Player(width/2, height-50);
-  
-  
+  theLadders.add(new Ladder(100,height-100,100,50));
 
-  }
-   
+
 }
 
 
@@ -40,43 +38,46 @@ void draw() {
 void runLevel1() {
   background(0);
   
-  
+  // theLadders
+  for (Ladder thisLadder:theLadders){
+    thisLadder.display();
+  }
+
+
   //jumpMan
   jumpMan.move();
   jumpMan. jump();
   jumpMan.display();
-  
+  println(jumpMan.canClimb());
+  println(jumpMan.climb);
+
   //thePlatforms
-  
-  // theLadders
-  
+
   //theMonkey
-  
+
   //theBarrels
-  
-  
-  
 }   
-    
+
 
 void keyPressed() {
   if (keyCode==RIGHT&& jumpMan.jump==false) {
     jumpMan.right=true;
-  } else if (keyCode==LEFT&& jumpMan.jump==false) {
+  } 
+  else if (keyCode==LEFT&& jumpMan.jump==false) {
     jumpMan.left= true;
   } 
   else if (key==' ' && jumpMan.jump==false) {
     jumpMan.jump=true;
     jumpMan.startY=jumpMan.y;
     jumpMan.dy=-4;
-    if (jumpMan.left==false && jumpMan.right==false){
+    if (jumpMan.left==false && jumpMan.right==false) {
       straightJump=true;
       jumpMan.dy=-5;
-      
     }
   } 
-  else if (keyCode==UP&& jumpMan.canClimb== true){
-    jumpMan.climb();
+  else if (keyCode==UP && jumpMan.canClimb== true) {
+    println("thingeslkdjfalksjflksadjf");
+    jumpMan.climb=true;
   }
 }
 
@@ -84,5 +85,6 @@ void keyReleased() {
   if (key!=' ' ) {
     jumpMan.right= false;
     jumpMan.left= false;
+    jumpMan.climb=false;
   }
 }
