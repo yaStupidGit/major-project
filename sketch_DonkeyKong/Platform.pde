@@ -1,23 +1,17 @@
-class Platform{
-  int x,y,h,w;
+class Platform {
+  int x, y;
+  int w=64;
+  int h=32;
   
-  
-  Platform(int _x,int _y,int _h,int _w){
+  Platform(int _x, int _y) {
     x=_x;
     y=_y;
-    h=_h;
-    w=_w;
   }
-  
-  
-  void display(){
+
+
+  void display() {
     noStroke();
-    fill(0,0,255);
-    rect(x,y,h,w);
+    fill(0, 0, 255);
+    rect(x, y, w, h);
   }
-  
-  //void pushUp(){
-    
-    
-  //}
 }

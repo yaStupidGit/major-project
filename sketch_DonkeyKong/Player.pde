@@ -3,7 +3,7 @@ class Player {
   float dy;
   int h=30;
   int w=30;
-  boolean jump, canClimb, left, right, climb;
+  boolean jump, left, right, climb, climbDown;
 
   Player(float _x, float _y) {
     x=_x;
@@ -22,6 +22,26 @@ class Player {
       jump();
     } else if (climb==true) {
       y-=3;
+      if (canClimb()==false) {
+      climb=false;
+      y+=6;
+    }
+      
+    } else if (climbDown==true) {
+      y+=3;
+      if (canClimb()==false) {
+      climbDown=false;
+      y-=6;
+      }
+      
+    }
+    if (canClimb()==false) {
+      climbDown=false;
+      climb=false;
+    }
+    if (fall()){
+      y+=dy;
+      dy+=GRAVITY;
     }
   } 
 
@@ -39,18 +59,41 @@ class Player {
       }
     }
   }
-  boolean canClimb() {
-    //checks if player is on a ladder
+
+
+  boolean fall() {
     for (Ladder thisLadder : theLadders) {
-      if (x>thisLadder.x &&
-        x<(thisLadder.w+thisLadder.x) &&
-        y>thisLadder.y&&
-        y<(thisLadder.y+thisLadder.h)) {
-        return true;
-      } else {
+      if (thisLadder.x>=x&&
+        thisLadder.x<x+w) {
         return false;
       }
     }
+    for (Platform thisPlatform : thePlatforms) {
+      if (thisPlatform.x>=x&&
+        thisPlatform.x+64>=x+w) {
+        return false;
+      }
+      if (y>=height-h) {
+        y=height-h;
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  boolean canClimb() {
+    //checks if player is on a ladder and allows player t interact
+    for (Ladder thisLadder : theLadders) {
+      if (x>=thisLadder.x &&
+        x<=(thisLadder.w+thisLadder.x) &&
+        y>=thisLadder.y-h&&
+        y<=(thisLadder.y+thisLadder.h+h)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
 
