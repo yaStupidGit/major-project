@@ -1,11 +1,12 @@
 class Ladder {
-  int x, y, h, w;
+  int x, y,h;
+  int w=16;
 
-  Ladder(int _x, int _y, int _h, int _w) {
+  Ladder(int _x, int _y,int _h) {
     x=_x;
     y=_y;
     h=_h;
-    w=_w;
+    
   }
   
   void display(){

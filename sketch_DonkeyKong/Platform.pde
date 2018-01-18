@@ -1,7 +1,7 @@
 class Platform {
   int x, y;
-  int w=64;
-  int h=32;
+  int w=32;
+  int h=16;
   
   Platform(int _x, int _y) {
     x=_x;
@@ -11,7 +11,7 @@ class Platform {
 
   void display() {
     noStroke();
-    fill(0, 0, 255);
+    fill(0, 0, 255,100);
     rect(x, y, w, h);
   }
 }

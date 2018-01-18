@@ -1,84 +1,103 @@
+//new copy
+
 class Player {
   float x, y, startY; 
   float dy;
-  int h=30;
-  int w=30;
+  int h=24;
+  int w=32;
   boolean jump, left, right, climb, climbDown;
+  boolean onPlatform, onLadder;
 
   Player(float _x, float _y) {
     x=_x;
     y=_y;
   }
   void display() {
-    fill(255, 0, 0);
-    rect(x, y, h, w);
+
+    image(jumpman, x, y, 32, 24);
   }
   void move() {
-    if (left==true) {
+    if (left==true && climb==false ) {
       x-=3;
-    } else if (right== true) {
+    } else if (right== true&&climb==false) {
       x+=3;
     } else if (jump==true) {
       jump();
     } else if (climb==true) {
       y-=3;
       if (canClimb()==false) {
-      climb=false;
-      y+=6;
-    }
-      
+        climb=false;
+        y+=6;
+      }
     } else if (climbDown==true) {
       y+=3;
       if (canClimb()==false) {
-      climbDown=false;
-      y-=6;
+        climbDown=false;
+        y-=6;
       }
-      
     }
     if (canClimb()==false) {
       climbDown=false;
       climb=false;
     }
-    if (fall()){
+    if (fall()) {
       y+=dy;
       dy+=GRAVITY;
     }
   } 
 
   void jump() {
-
+    y=startY;
     if (jump==true) {
-      if (straightJump) {
-      }
       y+=dy;
       dy+=GRAVITY ;
       if (y>startY) {
         y=startY;
         jump=false;
-        straightJump=false;
       }
     }
   }
 
 
   boolean fall() {
-    for (Ladder thisLadder : theLadders) {
-      if (thisLadder.x>=x&&
-        thisLadder.x<x+w) {
-        return false;
-      }
+    if (onLadder) {
+      return false;
+    } else if (onPlatform) {
+      return false;
     }
-    for (Platform thisPlatform : thePlatforms) {
-      if (thisPlatform.x>=x&&
-        thisPlatform.x+64>=x+w) {
-        return false;
-      }
-      if (y>=height-h) {
-        y=height-h;
-        return false;
-      }
+    if (y>ground) {
+      y=ground;
+      return false;
     }
+    else{
     return true;
+    }
+  }
+
+
+  void stand() {
+    if (climb==false) {
+      for (Platform thisPlatform : thePlatforms) {
+        if (onPlatform) {
+          y=thisPlatform.y-h;
+        }
+      }
+    }
+  }
+
+  void checkOnPlatform() {
+    for (Platform thisPlatform : thePlatforms) {
+      if (x>=thisPlatform.x &&
+        x <= thisPlatform.x+thisPlatform.w &&
+        y+h<= thisPlatform.y-5&&
+        thisPlatform.y<=y+y+50) {
+        onPlatform=true;
+      } else {
+        onPlatform=false;
+      }
+    }
+  }
+  void checkOnLadder() {
   }
 
 
@@ -103,5 +122,8 @@ class Player {
   }
   float dy() {
     return dy;
+  }
+  int h() {
+    return h;
   }
 }
